@@ -1,0 +1,73 @@
+# Document Signature App Server
+
+## Project Description
+This is the backend server for the Document Signature App. It is built with Node.js and Express.js and provides RESTful API endpoints for user authentication, document upload, management, sharing, and applying digital signatures. The server connects to a MongoDB database to store user and document data.
+
+## Installation
+
+1. Clone the repository.
+2. Navigate to the `server` directory.
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+## Running the Server
+
+- To start the server in production mode:
+  ```
+  npm start
+  ```
+- To start the server in development mode with auto-reloading (requires nodemon):
+  ```
+  npm run dev
+  ```
+
+The server will run on the port specified by the `PORT` environment variable or default to port 5000.
+
+## Environment Variables
+
+The server requires the following environment variables to be set (typically in a `.env` file in the `server` directory):
+
+- `PORT` - Port number for the server to listen on (default: 5000)
+- `MONGO_URI` - MongoDB connection string
+- `CLIENT_URL` - URL of the client application allowed for CORS
+
+## API Routes
+
+### Authentication Routes (`/api/auth`)
+
+- `POST /register` - Register a new user
+- `POST /login` - Login a user and receive authentication token
+- `GET /profile` - Get the profile of the logged-in user (requires authentication)
+
+### Document Routes (`/api/documents`) - All routes require authentication
+
+- `POST /upload` - Upload a new document (multipart/form-data with `document` field)
+- `GET /` - Get all documents of the logged-in user
+- `GET /shared-with-me` - Get documents shared with the logged-in user
+- `GET /:id/content` - Get the content of a document by ID
+- `GET /:id` - Get document metadata by ID
+- `POST /:id/sign` - Apply signatures to a document by ID
+- `PUT /:id/share` - Share a document by ID
+- `DELETE /:id` - Delete a document by ID
+- `GET /:id/download` - Download a document by ID
+
+## Folder Structure
+
+- `config/` - Configuration files (currently empty)
+- `controllers/` - Route handler functions for authentication and documents
+- `middleware/` - Custom middleware for authentication, error handling, and file uploads
+- `models/` - Mongoose models for User and Document
+- `routes/` - Express route definitions for authentication and documents
+- `uploads/` - Directory for storing uploaded documents
+- `server.js` - Main server entry point
+- `package.json` - Project metadata and dependencies
+
+## Deployment on Render
+
+This server can be deployed on Render.com with the following configuration:
+
+- A `render.yaml` file is included in the `server` directory for Render deployment.
+- The start command is `npm start`.
+- Environment variables `PORT`, `MONGO_URI`, and `CLIENT_URL` must be set in the Render dashboard.
