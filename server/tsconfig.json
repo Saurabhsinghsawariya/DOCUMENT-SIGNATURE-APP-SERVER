@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "rootDir": "./",     // Source files are in the current directory (server/)
+    "outDir": "./dist",  // Compiled JS files will go here
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": true
+  },
+  "include": [
+    "**/*.ts" // Include all TypeScript files in server/ and its subdirectories
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

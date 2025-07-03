@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: document-signature-app-server
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        value: YOUR_MONGO_URI_HERE
+      - key: PORT
+        value: "8000"
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: YOUR_FRONTEND_URL_HERE
+    autoDeploy: true
+    branch: main
+
+# Note:
+# - Replace YOUR_MONGO_URI_HERE with your actual MongoDB connection string.
+# - Replace YOUR_FRONTEND_URL_HERE with your frontend URL for CORS.
+# - The uploads/ and signed_documents/ folders are ephemeral on Render.
+#   For persistent storage, consider using external storage solutions like AWS S3 or a database.
